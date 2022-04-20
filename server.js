@@ -11,7 +11,7 @@ const db = require('./database.js')
 const morgan = require('morgan')
 const fs = require('fs')
 
-if (arguments.log != false) {
+if (arguments.log != 'false') {
   // Use morgan for logging to files
   // Create a write stream to append (flags: 'a') to a file
   const WRITESTREAM = fs.createWriteStream('access.log', { flags: 'a' })
