@@ -1,7 +1,7 @@
 // This ensures that things do not fail silently but will throw errors instead.
 "use strict";
 
-// Require better-sqlite.
+// Require better-sqlite.s
 const Database = require('better-sqlite3');
 
 // Connect to a database or create one if it doesn't exist yet.
