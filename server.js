@@ -1,4 +1,4 @@
-//irequire express and then minimist splicing
+//require express and then minimist splicing
 const express = require('express');
 const res = require('express/lib/response');
 const app = express()
