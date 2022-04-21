@@ -16,6 +16,10 @@ const db = require('./database.js')
 const morgan = require('morgan')
 const fs = require('fs')
 
+const server = app.listen(port, () => {
+  console.log('App listening on port %PORT%'.replace('%PORT%', port))
+});
+
 if (log == 'true') {
   // Use morgan for logging to files
   // Create a write stream to append (flags: 'a') to a file
@@ -77,11 +81,6 @@ if (debug == 'true') {
     throw new Error('Error test successful.')
   })
 }
-
-//a03 endpoints
-const server = app.listen(port, () => {
-    console.log('App listening on port %PORT%'.replace('%PORT%', port))
-});
 
 app.get('/app/', (req, res) => {
       res.statusCode = 200;
