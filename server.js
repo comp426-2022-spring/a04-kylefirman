@@ -16,6 +16,9 @@ const db = require('./database.js')
 const morgan = require('morgan')
 const fs = require('fs')
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 const server = app.listen(port, () => {
   console.log('App listening on port %PORT%'.replace('%PORT%', port))
 });
