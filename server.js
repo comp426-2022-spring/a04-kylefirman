@@ -1,27 +1,24 @@
 //require express and then minimist splicing
+const http = require('http');
+const fs = require('fs');
+const morgan = require('morgan');
+const db = require('./database.js');
+
 const express = require('express');
-const res = require('express/lib/response');
-const app = express()
-
-const args = require('minimist')(process.argv.slice(2))
-args["port"]
-args["debug"]
-args["log"]
-args["help"]
-const port = args.port || process.env.PORT || 5000;
-const debug = args.debug || 'false';
-const log = args.log || 'true';
-
-const db = require('./database.js')
-const morgan = require('morgan')
-const fs = require('fs')
+const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const server = app.listen(port, () => {
-  console.log('App listening on port %PORT%'.replace('%PORT%', port))
-});
+const args = require('minimist')(process.argv.slice(2))
+args["port"]
+const port = args.port || process.env.PORT || 5000;
+
+args["debug"]
+args["log"]
+args["help"]
+const debug = args.debug || 'false';
+const log = args.log || 'true';
 
 if (log == 'true') {
   // Use morgan for logging to files
@@ -53,6 +50,10 @@ if (args.help || args.h) {
   console.log(help)
   process.exit(0)
 }
+
+const server = app.listen(port, () => {
+  console.log('App listening on port %PORT%'.replace('%PORT%', port))
+});
 
 app.use( (req, res, next) => {
   let logdata = {
