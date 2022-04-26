@@ -17,7 +17,7 @@ app.use(express.json());
 if (args.log == 'false') {
     console.log("access.log not created");
 } else {
-    const LogAcess = fs.createWriteStream('access.log', { flags: 'a' });
+    const LogAccess = fs.createWriteStream('access.log', { flags: 'a' });
     app.use(morgan('combined', { stream: LogAccess }));
 }
 
