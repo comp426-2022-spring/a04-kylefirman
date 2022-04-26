@@ -18,9 +18,10 @@
   },
   "homepage": "https://github.com/comp426-2022-spring/a04-kylefirman#readme",
   "dependencies": {
-    "express": "^4.17.3",
+    "express": "^4.18.0",
     "fs": "^0.0.1-security",
     "http": "^0.0.1-security",
+    "minimist": "^1.2.6",
     "morgan": "^1.10.0"
   }
 }
