@@ -14,17 +14,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
-// If --log == false, don't make a log file
-if (args.log == 'false') {
-    console.log("NOTICE: not creating file access.log");
-} else {
+if (log == 'true') {
     // Use morgan for logging to files
-    // Create a write stream to append to an access.log file
-    const accessLog = fs.createWriteStream('access.log', { flags: 'a' });
-
+    // Create a write stream to append (flags: 'a') to a file
+    const accessStream = fs.createWriteStream('access.log', { flags: 'a' })
     // Set up the access logging middleware
-    app.use(morgan('combined', { stream: accessLog }));
-}
+    app.use(morgan('combined', { stream: accessStream }))
+  }
 
 
 /*
