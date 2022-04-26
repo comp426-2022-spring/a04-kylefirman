@@ -12,7 +12,7 @@ const morgan = require('morgan');
 const args = require('minimist')(process.argv.slice(2));
 
 // Require exports from database.js
-const db = require('./database.js');
+const db = require('./backup db.js');
 
 // Require Express.js
 const express = require('express');
