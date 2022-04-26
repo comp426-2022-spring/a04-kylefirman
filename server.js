@@ -22,10 +22,6 @@ if (args.log == 'false') {
 }
 
 
-/*
-    HELP
-*/
-// Define help constant
 const help = (`
 server.js [options]
 --port, -p	Set the port number for the server to listen on. Must be an integer
@@ -39,67 +35,53 @@ server.js [options]
 --help, -h	Return this message and exit.
 `);
 
-// If --help is called, print help and exit
+// If --help or -h, echo help text to STDOUT and exit
 if (args.help || args.h) {
     console.log(help);
     process.exit(0);
 }
 
 
-/* 
-    COIN FUNCTIONS 
-*/
-// Coin flip
+//Coin Functions because importing them wouldnt work 
 function coinFlip() {
-    return (Math.floor(Math.random() * 2) == 0) ? "heads" : "tails";
-}
-
-// Coin flips
-function coinFlips(flips) {
-    let results = [];
+    let flipped = Math.floor(Math.random() * 2)
+    if (flipped == 0) {
+      return "heads";
+    } else {
+      return "tails";
+    }
+  }
+    
+  function coinFlips(flips) {
+    let results = [flips];
     for (let i = 0; i < flips; i++) {
-      results.push(coinFlip());
+      results[i] = coinFlip();
     }
     return results;
-}
-
-// Count flips
-function countFlips(array) {
-    const result = {
-      tails: 0,
-      heads: 0
-    };
-    if (array.length == 1) {
-      if (array[0] ==  "heads") {
-         return { heads: 1 };
-      }
-      else {
-        return { tails: 1 };
+  }
+    
+  function countFlips(array) {
+    let headcount = 0;
+    let tailscount = 0;
+    for (let i = 0; i < array.length; i++) {
+      if (array[i] == "heads") {
+        headcount++;
+      } else {
+        tailscount++;
       }
     }
-    else {
-      for (let i = 0; i < array.length; i++) {
-        if (array[i] ==  "heads") {
-          result.heads++;
-        }
-        else {
-          result.tails++;
-        }
-      }
+    return {"heads": headcount, "tails": tailscount};
+  }
+    
+  function flipACoin(call) {
+    var flip = coinFlip()
+    if (call == flip) {
+      var result = "win"
+    } else {
+      var result = "lose"
     }
-    return result;
-}
-
-// Flip a coin
-function flipACoin(call) {
-  let flip = coinFlip();
-  const result = {
-    call: call,
-    flip: flip,
-    result: ((flip == call) ? "win" : "lose")
-  };
-  return result;
-}
+    return {"call": call, "flip": flip, "result": result};
+  }
 
 app.use( (req, res, next) => {
     let logdata = {
