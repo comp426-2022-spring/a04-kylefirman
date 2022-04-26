@@ -1,35 +1,19 @@
-// Require http module
 const http = require('http');
-
-// Require fs
 const fs = require('fs');
-
-// Require morgan
 const morgan = require('morgan');
-
-// Require minimist module
-// Use minimist to process one argument `--port=` on the command line after `node server.js`.
-const args = require('minimist')(process.argv.slice(2));
-
-// Require exports from database.js
 const db = require('./database.js');
 
-// Require Express.js
+const args = require('minimist')(process.argv.slice(2))
+args["port"]
+const port = args.port || process.env.PORT || 5000;
+
 const express = require('express');
 const app = express();
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Define allowed argument name 'port'.
-args['port'];
 
-// Define a const `port` using the argument from the command line.
-const port = args.port || process.env.PORT || 5555;
-
-
-/*
-    LOGS
-*/
 // If --log == false, don't make a log file
 if (args.log == 'false') {
     console.log("NOTICE: not creating file access.log");
@@ -188,11 +172,6 @@ app.get('/app/flip/call/tails', (req, res) => {
     res.status(200).json({ 'call' : flip.call, 'flip': flip.flip, 'result': flip.result});
 });
 
-
-/* 
-    SERVER 
-*/
-// Start an app server
 app.listen(port, () => {
     console.log('App listening on port %PORT%'.replace('%PORT%', port))
 });
