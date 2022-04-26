@@ -142,10 +142,13 @@ app.use( (req, res, next) => {
 
   
 if (args.debug || debug) {
-    app.get('/app/log/access/', (req, res, next) => {
-        const stmt = db.prepare("SELECT * FROM accesslog").all();
-	    res.status(200).json(stmt);
-    })
+    app.get('/app/log/access', (req, res) => {
+        try {
+            const stmt = db.prepare('SELECT * FROM accesslog').all()
+            res.status(200).json(stmt)
+        } catch {
+            console.error('Error')
+    }})
     app.get('/app/error', (req, res) => {
         throw new Error('Error test successful.');
     })
